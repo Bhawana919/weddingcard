@@ -1122,9 +1122,9 @@
       <div class="gbox" id="gbox"></div>
       <canvas class="zd kal l" width="104" height="150" aria-hidden="true"></canvas>
       <canvas class="zd kal r" width="104" height="150" aria-hidden="true"></canvas>
-      <div class="center t1 npd" data-in style="--d:.3s">॥ श्री गणेशाय नमः ॥</div>
-      <div class="center t2 np" data-in style="--d:.5s">हरेक शुभ कार्यको सुरुवात<br>श्री गणेशबाट</div>
-      <div class="center t3" data-in style="--d:.7s">Every good beginning starts<br>with Lord Ganesha’s blessing.</div>
+      <div class="center t1 npd" data-in style="--d:.02s">॥ श्री गणेशाय नमः ॥</div>
+      <div class="center t2 np" data-in style="--d:.08s">हरेक शुभ कार्यको सुरुवात<br>श्री गणेशबाट</div>
+      <div class="center t3" data-in style="--d:.14s">Every good beginning starts<br>with Lord Ganesha’s blessing.</div>
     </section>
 
     <!-- 4 · together -->
@@ -1220,7 +1220,7 @@
       },
       mapUrl: "https://maps.app.goo.gl/vXqPxViDdYtSKS5e7"
     };
-    const DUR = { 2: 2000, 1: 2100, 4: 2400 };
+    const DUR = { 2: 2000, 1: 500, 4: 2400 };
     const ORDER = [0, 2, 1, 4, 5];
     const BAR = { 2: 0, 1: 1, 4: 2, 5: 3 };
     const nextOf = i => ORDER[Math.min(ORDER.length - 1, ORDER.indexOf(i) + 1)];
@@ -1468,12 +1468,12 @@
         }
       });
       strokes.forEach(p => { const L = p.length; p.dashArray = [L, L + 1]; p.dashOffset = L; });
-      const t0 = performance.now() / 1000 + .02, N = strokes.length;
+      const t0 = performance.now() / 1000, N = strokes.length;
       anims.push(() => {
         const t = performance.now() / 1000 - t0;
-        strokes.forEach((p, i) => { const st = i / N * .55, k = Math.min(1, Math.max(0, (t - st) / .28)); const e = 1 - Math.pow(1 - k, 3); p.dashOffset = p.length * (1 - e); });
-        dots.forEach(d => d.opacity = Math.min(1, Math.max(0, (t - .62) / .22)));
-        if (t > .9) { strokes.forEach(p => p.dashArray = []); return false; }
+        strokes.forEach((p, i) => { const st = i / N * .18, k = Math.min(1, Math.max(0, (t - st) / .14)); const e = 1 - Math.pow(1 - k, 3); p.dashOffset = p.length * (1 - e); });
+        dots.forEach(d => d.opacity = Math.min(1, Math.max(0, (t - .2) / .12)));
+        if (t > .38) { strokes.forEach(p => p.dashArray = []); return false; }
       });
     }
     function beadSwag(x1, y1, x2, y2, sag, opts) {
