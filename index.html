@@ -1018,7 +1018,8 @@
             p.createCanvas(W, H, p.WEBGL);
             brush.scaleBrushes(Math.max(1.4, W / 260));
             painter.ok = true;
-            p.background(C.ivory);
+            p.background(cur === 0 ? "#8E0E1A" : C.ivory);
+            if (cur >= 0 && SCENE_PAINT[cur]) SCENE_PAINT[cur]();
           };
           p.draw = () => {
             const t0 = performance.now();
