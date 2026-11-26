@@ -163,97 +163,156 @@
       pointer-events: none
     }
 
-    /* cover — envelope */
+    /* cover — Nepali traditional envelope */
     #s0 {
-      background: radial-gradient(ellipse at 50% 60%, #1a4a4a 0%, #0d2f30 50%, #061a1b 100%);
+      background: radial-gradient(ellipse at 50% 40%, #3a0a12 0%, #1f0509 60%, #0e0204 100%);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       overflow: hidden
     }
 
+    /* floating particles */
     #s0 .sparkles { position:absolute; inset:0; pointer-events:none; z-index:0 }
     #s0 .sparkles i {
       position:absolute; width:3px; height:3px; border-radius:50%;
       background:#ffe9a0; opacity:0;
       animation: sparkle 4s ease-in-out infinite
     }
-    @keyframes sparkle { 0%,100%{opacity:0;transform:scale(.5)} 50%{opacity:.85;transform:scale(1.2)} }
+    @keyframes sparkle { 0%,100%{opacity:0;transform:scale(.5)} 50%{opacity:.7;transform:scale(1.2)} }
+
+    /* ॐ watermark */
+    #s0 .om-bg {
+      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      font-size:280px; color:rgba(180,100,40,.04); z-index:0;
+      font-family:serif; pointer-events:none; user-select:none
+    }
 
     #s0 .env-heading {
       font-family:"Cormorant Garamond",serif; font-weight:600;
       font-size:13px; letter-spacing:.28em; text-transform:uppercase;
-      color:#d4b96a; margin-bottom:28px; z-index:2;
+      color:#d4b96a; margin-bottom:10px; z-index:2;
       opacity:0; transform:translateY(12px);
       transition: opacity .8s ease .3s, transform .8s ease .3s
     }
     #s0.on .env-heading { opacity:1; transform:none }
 
-    .envelope-wrap {
-      position:relative; width:72%; max-width:320px; aspect-ratio:1.55/1;
-      perspective:900px; z-index:2;
-      opacity:0; transform:scale(.92);
-      transition: opacity .7s ease .5s, transform .7s ease .5s
+    /* mantra line */
+    #s0 .env-mantra {
+      font-family:"Yatra One","Mukta",sans-serif; font-size:14px;
+      color:rgba(232,195,106,.7); margin-bottom:22px; z-index:2;
+      opacity:0; transition: opacity .6s ease .5s
     }
-    #s0.on .envelope-wrap { opacity:1; transform:scale(1) }
+    #s0.on .env-mantra { opacity:1 }
+
+    .envelope-wrap {
+      position:relative; width:78%; max-width:340px; aspect-ratio:1.45/1;
+      perspective:900px; z-index:2;
+      opacity:0; transform:scale(.88) translateY(10px);
+      transition: opacity .8s ease .5s, transform .8s cubic-bezier(.2,.7,.2,1) .5s
+    }
+    #s0.on .envelope-wrap { opacity:1; transform:scale(1) translateY(0) }
 
     .envelope {
       position:relative; width:100%; height:100%; cursor:pointer;
-      border-radius:6px; overflow:visible
+      border-radius:8px; overflow:visible;
+      filter: drop-shadow(0 16px 40px rgba(0,0,0,.55))
     }
 
     .env-body {
-      position:absolute; inset:0; border-radius:6px;
-      background: linear-gradient(135deg, #a01830 0%, #8b1428 40%, #7a1024 100%);
-      box-shadow: 0 12px 40px rgba(0,0,0,.45), inset 0 0 0 1px rgba(212,185,106,.2);
+      position:absolute; inset:0; border-radius:8px;
+      background: linear-gradient(145deg, #b3141f 0%, #9a1028 35%, #7a0e20 70%, #5a0a18 100%);
       overflow:hidden
     }
-    /* diamond pattern on envelope */
+    /* dhaka geometric pattern */
     .env-body::before {
       content:""; position:absolute; inset:0;
       background-image:
-        radial-gradient(circle, rgba(212,185,106,.22) 1.5px, transparent 1.5px),
-        radial-gradient(circle, rgba(212,185,106,.12) 1px, transparent 1px);
-      background-size: 28px 28px, 28px 28px;
-      background-position: 0 0, 14px 14px
+        linear-gradient(45deg, rgba(212,185,106,.08) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(212,185,106,.08) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(212,185,106,.08) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(212,185,106,.08) 75%),
+        radial-gradient(circle, rgba(212,185,106,.12) 1px, transparent 1.5px);
+      background-size: 20px 20px, 20px 20px, 20px 20px, 20px 20px, 10px 10px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0, 0 0
     }
-    /* gold border inside */
+    /* double gold border */
     .env-body::after {
-      content:""; position:absolute; inset:6px; border-radius:4px;
-      border:1px solid rgba(212,185,106,.2); pointer-events:none
+      content:""; position:absolute; inset:5px; border-radius:5px;
+      border:1.5px solid rgba(212,185,106,.35);
+      box-shadow: inset 0 0 0 4px transparent, inset 0 0 0 5px rgba(212,185,106,.12);
+      pointer-events:none
     }
 
-    /* fold lines */
-    .env-fold-bl, .env-fold-br { position:absolute; z-index:1 }
+    /* marigold garland SVG at top */
+    .env-marigold-top {
+      position:absolute; top:-8px; left:10%; right:10%; height:18px;
+      z-index:5; pointer-events:none; display:flex; justify-content:center; gap:0
+    }
+    .env-marigold-top i {
+      width:14px; height:14px; border-radius:50% 50% 40% 40%;
+      flex-shrink:0;
+    }
+    .env-marigold-top i:nth-child(odd) { background:radial-gradient(circle at 40% 30%, #ff9933, #e67300); }
+    .env-marigold-top i:nth-child(even) { background:radial-gradient(circle at 40% 30%, #ffcc00, #e6a800); }
+    .env-marigold-top i:nth-child(3n) { background:radial-gradient(circle at 40% 30%, #ff6600, #cc5200); }
+
+    /* marigold garland at bottom */
+    .env-marigold-bot {
+      position:absolute; bottom:-6px; left:10%; right:10%; height:14px;
+      z-index:5; pointer-events:none; display:flex; justify-content:center; gap:0
+    }
+    .env-marigold-bot i {
+      width:12px; height:12px; border-radius:40% 40% 50% 50%;
+      flex-shrink:0;
+    }
+    .env-marigold-bot i:nth-child(odd) { background:radial-gradient(circle at 40% 70%, #ff9933, #e67300); }
+    .env-marigold-bot i:nth-child(even) { background:radial-gradient(circle at 40% 70%, #ffcc00, #e6a800); }
+
+    /* corner decorations — paisley/leaf style */
+    .env-corner {
+      position:absolute; width:28px; height:28px; z-index:5; pointer-events:none;
+      opacity:.6
+    }
+    .env-corner::before, .env-corner::after {
+      content:""; position:absolute; border-radius:0 50% 50% 50%;
+      background:rgba(212,185,106,.25)
+    }
+    .env-corner::before { width:18px; height:18px; }
+    .env-corner::after { width:12px; height:12px; top:3px; left:3px; background:rgba(212,185,106,.15); }
+    .env-corner.tl { top:10px; left:10px; transform:rotate(0deg) }
+    .env-corner.tr { top:10px; right:10px; transform:rotate(90deg) }
+    .env-corner.bl { bottom:10px; left:10px; transform:rotate(-90deg) }
+    .env-corner.br { bottom:10px; right:10px; transform:rotate(180deg) }
+
+    /* fold lines — diagonal creases */
+    .env-fold-bl, .env-fold-br { position:absolute; z-index:1; pointer-events:none }
     .env-fold-bl {
       bottom:0; left:0; width:100%; height:100%;
-      background: linear-gradient(to top right, rgba(90,10,20,.35) 48.5%, transparent 50%);
-      pointer-events:none
+      background: linear-gradient(to top right, rgba(60,6,14,.4) 48.5%, transparent 50%)
     }
     .env-fold-br {
       bottom:0; right:0; width:100%; height:100%;
-      background: linear-gradient(to top left, rgba(90,10,20,.35) 48.5%, transparent 50%);
-      pointer-events:none
+      background: linear-gradient(to top left, rgba(60,6,14,.4) 48.5%, transparent 50%)
     }
 
     /* top flap */
     .env-flap {
       position:absolute; top:0; left:0; width:100%; height:55%;
       transform-origin: top center; z-index:3;
-      transition: transform .8s cubic-bezier(.4,.0,.2,1)
+      transition: transform 1s cubic-bezier(.4,.0,.15,1)
     }
     .env-flap-inner {
       width:100%; height:100%;
-      background: linear-gradient(180deg, #8b1428 0%, #9a1830 100%);
+      background: linear-gradient(180deg, #7a0e20 0%, #9a1830 100%);
       clip-path: polygon(0 0, 100% 0, 50% 100%);
-      box-shadow: 0 4px 12px rgba(0,0,0,.25);
+      box-shadow: 0 4px 16px rgba(0,0,0,.3);
       position:relative
     }
     .env-flap-inner::before {
       content:""; position:absolute; inset:0;
       background-image:
-        radial-gradient(circle, rgba(212,185,106,.18) 1.5px, transparent 1.5px),
-        radial-gradient(circle, rgba(212,185,106,.1) 1px, transparent 1px);
-      background-size: 28px 28px, 28px 28px;
-      background-position: 0 0, 14px 14px;
+        linear-gradient(45deg, rgba(212,185,106,.06) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(212,185,106,.06) 25%, transparent 25%);
+      background-size: 20px 20px;
       clip-path: polygon(0 0, 100% 0, 50% 100%)
     }
 
@@ -261,40 +320,92 @@
       transform: rotateX(180deg)
     }
 
-    /* wax seal */
+    /* wax seal — kalash/ॐ style */
     .wax-seal {
       position:absolute; left:50%; top:50%; z-index:4;
-      width:52px; height:52px;
+      width:56px; height:56px;
       transform:translate(-50%,-50%);
       border-radius:50%;
-      background: radial-gradient(circle at 38% 35%, #f0d875, #c9a033 60%, #a07b20);
-      box-shadow: 0 3px 10px rgba(0,0,0,.35), inset 0 1px 2px rgba(255,240,180,.5);
-      display:flex; align-items:center; justify-content:center;
-      font-family:"Alex Brush",cursive; font-size:20px; color:#5a3a0a;
-      text-shadow: 0 1px 0 rgba(255,240,200,.4);
-      transition: transform .4s ease, opacity .4s ease
+      background: radial-gradient(circle at 38% 32%, #f5e08a, #d4a530 50%, #a07b20 85%, #7a5a10);
+      box-shadow: 0 4px 14px rgba(0,0,0,.4), inset 0 2px 3px rgba(255,245,200,.5), 0 0 0 2px rgba(160,120,30,.5);
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      transition: transform .5s ease, opacity .5s ease;
+      overflow:hidden
+    }
+    .wax-seal::after {
+      content:""; position:absolute; inset:3px; border-radius:50%;
+      border:1px solid rgba(255,240,180,.3)
+    }
+    .wax-seal .seal-text {
+      font-family:"Alex Brush",cursive; font-size:22px; color:#5a3a0a;
+      text-shadow: 0 1px 0 rgba(255,240,200,.4); line-height:1; z-index:1
     }
     .envelope.opening .wax-seal {
-      transform: translate(-50%,-50%) scale(0); opacity:0
+      transform: translate(-50%,-50%) scale(0) rotate(180deg); opacity:0
     }
 
-    /* names on envelope */
+    /* names on envelope — both scripts */
     .env-names {
-      position:absolute; bottom:14%; left:0; right:0; text-align:center;
-      font-family:"Alex Brush",cursive; font-size:clamp(22px, 6vw, 30px);
-      color:#d4b96a; z-index:2; pointer-events:none;
-      text-shadow: 0 1px 4px rgba(0,0,0,.3)
+      position:absolute; bottom:12%; left:0; right:0; text-align:center;
+      z-index:2; pointer-events:none
     }
+    .env-names .en {
+      font-family:"Alex Brush",cursive; font-size:clamp(22px, 6vw, 30px);
+      color:#e8c36a; display:block;
+      text-shadow: 0 1px 4px rgba(0,0,0,.35)
+    }
+    .env-names .np {
+      font-family:"Yatra One","Mukta",sans-serif; font-size:clamp(11px, 3vw, 14px);
+      color:rgba(232,195,106,.65); display:block; margin-top:2px;
+      letter-spacing:.05em
+    }
+
+    /* dhaka band at bottom of envelope */
+    .env-dhaka {
+      position:absolute; bottom:0; left:5px; right:5px; height:10px;
+      z-index:5; display:flex; overflow:hidden; border-radius:0 0 6px 6px
+    }
+    .env-dhaka i {
+      flex:0 0 10px; height:10px;
+      clip-path: polygon(50% 0%, 100% 100%, 0% 100%)
+    }
+    .env-dhaka i:nth-child(4n+1) { background:#b3141f }
+    .env-dhaka i:nth-child(4n+2) { background:#1a1a1a }
+    .env-dhaka i:nth-child(4n+3) { background:#f2e8d5 }
+    .env-dhaka i:nth-child(4n) { background:#f6a800 }
 
     #s0 .tap-text {
       font-family:"Cormorant Garamond",serif; font-weight:600;
       font-size:12px; letter-spacing:.3em; text-transform:uppercase;
-      color:rgba(212,185,106,.6); margin-top:28px; z-index:2;
-      opacity:0; transition: opacity .6s ease .9s
+      color:rgba(212,185,106,.55); margin-top:30px; z-index:2;
+      opacity:0; transition: opacity .6s ease 1s
     }
     #s0.on .tap-text { opacity:1 }
-    #s0 .tap-text { animation: tapPulse 2s ease-in-out infinite 1.5s }
-    @keyframes tapPulse { 0%,100%{opacity:.6} 50%{opacity:1} }
+    #s0 .tap-text { animation: tapPulse 2.2s ease-in-out infinite 1.5s }
+    @keyframes tapPulse { 0%,100%{opacity:.55} 50%{opacity:1} }
+
+    /* diyo lamps flanking envelope */
+    .env-diyo {
+      position:absolute; z-index:3; pointer-events:none
+    }
+    .env-diyo.left { left:4%; top:50%; transform:translateY(-50%) }
+    .env-diyo.right { right:4%; top:50%; transform:translateY(-50%) }
+    .diyo-flame {
+      width:8px; height:14px; border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+      background: radial-gradient(ellipse at 50% 60%, #fff5c0, #ffb830 50%, #ff6600);
+      margin:0 auto 2px; animation: flame 1.2s ease-in-out infinite alternate;
+      box-shadow: 0 0 8px 2px rgba(255,160,30,.4)
+    }
+    @keyframes flame { 0%{transform:scaleX(1) scaleY(1)} 50%{transform:scaleX(.85) scaleY(1.1)} 100%{transform:scaleX(1.1) scaleY(.95)} }
+    .diyo-lamp {
+      width:18px; height:8px; border-radius:0 0 50% 50%;
+      background: linear-gradient(180deg, #c9a033, #8a6a1a);
+      margin:0 auto; position:relative
+    }
+    .diyo-lamp::after {
+      content:""; position:absolute; top:-1px; left:-3px; right:-3px; height:3px;
+      background:#d4b96a; border-radius:2px
+    }
 
     .zd {
       display: block
@@ -929,17 +1040,43 @@
     <!-- 0 · cover -->
     <section class="scene" id="s0" aria-label="Wedding invitation cover">
       <div class="sparkles" id="sparkles"></div>
-      <div class="env-heading">✦ A Special Invitation For You ✦</div>
+      <div class="om-bg" aria-hidden="true">ॐ</div>
+
+      <!-- diyos flanking -->
+      <div class="env-diyo left"><div class="diyo-flame"></div><div class="diyo-lamp"></div></div>
+      <div class="env-diyo right"><div class="diyo-flame"></div><div class="diyo-lamp"></div></div>
+
+      <div class="env-heading">✦ शुभ निमन्त्रणा ✦</div>
+      <div class="env-mantra">॥ श्री गणेशाय नमः ॥</div>
+
       <div class="envelope-wrap">
         <div class="envelope" id="envelope">
           <div class="env-body"></div>
+          <!-- corner paisleys -->
+          <div class="env-corner tl"></div>
+          <div class="env-corner tr"></div>
+          <div class="env-corner bl"></div>
+          <div class="env-corner br"></div>
+          <!-- marigold garlands -->
+          <div class="env-marigold-top" id="marigoldTop"></div>
+          <div class="env-marigold-bot" id="marigoldBot"></div>
+          <!-- dhaka band -->
+          <div class="env-dhaka" id="dhakaBand"></div>
+          <!-- folds -->
           <div class="env-fold-bl"></div>
           <div class="env-fold-br"></div>
+          <!-- flap -->
           <div class="env-flap"><div class="env-flap-inner"></div></div>
-          <div class="wax-seal">A&S</div>
-          <div class="env-names">Aashish & Swostika</div>
+          <!-- wax seal with ॐ -->
+          <div class="wax-seal"><span class="seal-text">A&S</span></div>
+          <!-- names -->
+          <div class="env-names">
+            <span class="en">Aashish & Swostika</span>
+            <span class="np">आशीष ✦ स्वस्तिका</span>
+          </div>
         </div>
       </div>
+
       <div class="tap-text">TAP TO OPEN</div>
     </section>
 
@@ -1162,8 +1299,8 @@
     }
     const SCENE_PAINT = {
       0: () => {
-        // Envelope scene uses CSS background, just set frame bg to dark teal
-        frame.style.background = "#0d2f30";
+        // Envelope scene uses CSS background, match frame bg to deep maroon
+        frame.style.background = "#1f0509";
       },
       1: () => paint(C.ivory, [
         blob(W * .5, H * .33, W * .42, "#F6B23A", 70, .55), blob(W * .5, H * .33, W * .26, "#F7C85A", 60, .4),
@@ -1432,6 +1569,19 @@
           s.style.width = s.style.height = (2 + Math.random() * 2) + "px";
           box.appendChild(s);
         }
+        // Populate Nepali marigold garlands & dhaka band
+        const mTop = document.getElementById("marigoldTop");
+        const mBot = document.getElementById("marigoldBot");
+        const dhaka = document.getElementById("dhakaBand");
+        if (mTop && !mTop.childElementCount) {
+          for (let i = 0; i < 18; i++) mTop.appendChild(document.createElement("i"));
+        }
+        if (mBot && !mBot.childElementCount) {
+          for (let i = 0; i < 22; i++) mBot.appendChild(document.createElement("i"));
+        }
+        if (dhaka && !dhaka.childElementCount) {
+          for (let i = 0; i < 36; i++) dhaka.appendChild(document.createElement("i"));
+        }
         // Reset envelope state
         const env = document.getElementById("envelope");
         if (env) env.classList.remove("opening");
@@ -1476,13 +1626,19 @@
       if (i === 5) bars.forEach(b => { b.style.transition = "none"; b.style.width = "100%"; });
     }
 
-    // Envelope open animation → then go to scene 1
+    // Envelope open animation → then go to scene 1 (tap envelope or TAP TO OPEN)
     const envelope = document.getElementById("envelope");
-    envelope.addEventListener("click", () => {
+    function openEnvelope() {
       if (envelope.classList.contains("opening")) return;
       envelope.classList.add("opening");
-      setTimeout(() => go(1), 1000);
-    });
+      setTimeout(() => go(1), 950);
+    }
+    envelope.addEventListener("click", openEnvelope);
+    const tapText = document.querySelector("#s0 .tap-text");
+    if (tapText) {
+      tapText.style.cursor = "pointer";
+      tapText.addEventListener("click", openEnvelope);
+    }
     tap.querySelector(".next").addEventListener("click", () => go(nextOf(cur)));
     tap.querySelector(".prev").addEventListener("click", () => go(prevOf(cur)));
     skip.addEventListener("click", () => go(5));
