@@ -163,9 +163,9 @@
       pointer-events: none
     }
 
-    /* cover — Nepali traditional envelope */
+    /* cover — Nepali traditional envelope on warm sandalwood-ivory backdrop */
     #s0 {
-      background: radial-gradient(ellipse at 50% 40%, #3a0a12 0%, #1f0509 60%, #0e0204 100%);
+      background: radial-gradient(ellipse at 50% 42%, #FFF9EE 0%, #F4E4C8 55%, #DFC191 100%);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       overflow: hidden
     }
@@ -174,22 +174,22 @@
     #s0 .sparkles { position:absolute; inset:0; pointer-events:none; z-index:0 }
     #s0 .sparkles i {
       position:absolute; width:3px; height:3px; border-radius:50%;
-      background:#ffe9a0; opacity:0;
+      background:#C8922A; opacity:0;
       animation: sparkle 4s ease-in-out infinite
     }
-    @keyframes sparkle { 0%,100%{opacity:0;transform:scale(.5)} 50%{opacity:.7;transform:scale(1.2)} }
+    @keyframes sparkle { 0%,100%{opacity:0;transform:scale(.5)} 50%{opacity:.65;transform:scale(1.2)} }
 
     /* ॐ watermark */
     #s0 .om-bg {
       position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-      font-size:280px; color:rgba(180,100,40,.04); z-index:0;
+      font-size:280px; color:rgba(184,134,47,.07); z-index:0;
       font-family:serif; pointer-events:none; user-select:none
     }
 
     #s0 .env-heading {
-      font-family:"Cormorant Garamond",serif; font-weight:600;
-      font-size:13px; letter-spacing:.28em; text-transform:uppercase;
-      color:#d4b96a; margin-bottom:10px; z-index:2;
+      font-family:"Cormorant Garamond",serif; font-weight:700;
+      font-size:14px; letter-spacing:.26em; text-transform:uppercase;
+      color:#6B0F1A; margin-bottom:8px; z-index:2;
       opacity:0; transform:translateY(12px);
       transition: opacity .8s ease .3s, transform .8s ease .3s
     }
@@ -198,7 +198,7 @@
     /* mantra line */
     #s0 .env-mantra {
       font-family:"Yatra One","Mukta",sans-serif; font-size:14px;
-      color:rgba(232,195,106,.7); margin-bottom:22px; z-index:2;
+      color:#8C5A16; margin-bottom:24px; z-index:2;
       opacity:0; transition: opacity .6s ease .5s
     }
     #s0.on .env-mantra { opacity:1 }
@@ -375,14 +375,25 @@
     .env-dhaka i:nth-child(4n) { background:#f6a800 }
 
     #s0 .tap-text {
-      font-family:"Cormorant Garamond",serif; font-weight:600;
+      font-family:"Cormorant Garamond",serif; font-weight:700;
       font-size:12px; letter-spacing:.3em; text-transform:uppercase;
-      color:rgba(212,185,106,.55); margin-top:30px; z-index:2;
+      color:rgba(107,15,26,.78); margin-top:30px; z-index:2;
       opacity:0; transition: opacity .6s ease 1s
     }
     #s0.on .tap-text { opacity:1 }
     #s0 .tap-text { animation: tapPulse 2.2s ease-in-out infinite 1.5s }
-    @keyframes tapPulse { 0%,100%{opacity:.55} 50%{opacity:1} }
+    @keyframes tapPulse { 0%,100%{opacity:.6} 50%{opacity:1} }
+
+    /* revealed Shubh Vivah card (#s2) */
+    #s2 { color: #F7E7C4 }
+    #s2 .mantra { top: 15.5%; font-size: 15px; color: var(--gold-l); letter-spacing: .05em }
+    #s2 .shubha { top: 20.5%; font-size: clamp(40px, 12vw, 54px); line-height: 1.15; color: var(--gold-l); text-shadow: 0 2px 0 rgba(60, 5, 10, .45) }
+    #s2 .names { top: 34.5% }
+    #s2 .names .script { display: block; font-size: clamp(50px, 15vw, 68px); line-height: 1.05; color: #FFF1D2; text-shadow: 0 2px 6px rgba(50, 0, 5, .35) }
+    #s2 .names .amp { display: block; font-size: 20px; letter-spacing: .3em; color: var(--gold-l); margin: 2px 0 }
+    #s2 .when { top: 65%; font-size: 19px; font-weight: 600; letter-spacing: .06em; line-height: 1.45 }
+    #s2 .when .np { font-size: 16px; font-weight: 500; color: var(--gold-l) }
+    #s2 .open { top: 76.5%; display: flex; justify-content: center; align-items: center; gap: 64px }
 
     /* diyo lamps flanking envelope */
     .env-diyo {
@@ -1080,6 +1091,21 @@
       <div class="tap-text">TAP TO OPEN</div>
     </section>
 
+    <!-- 2 · revealed Shubh Vivah cover card -->
+    <section class="scene" id="s2" aria-label="Shubh Vivah invitation card">
+      <svg class="rough" id="coverArt"></svg>
+      <div class="center mantra npd" data-in style="--d:.15s">॥ श्री गणेशाय नमः ॥</div>
+      <div class="center shubha npd" data-in style="--d:.35s">शुभ विवाह</div>
+      <div class="center names" data-in style="--d:.6s">
+        <span class="script">Aashish</span><span class="amp">&amp;</span><span class="script">Swostika</span>
+      </div>
+      <div class="center when" data-in style="--d:.85s">Saturday, 12 December 2026<br><span class="np">मंसिर २६ गते, २०८३</span></div>
+      <div class="center open" data-in style="--d:1.05s">
+        <canvas class="zd diyo" width="64" height="74" aria-hidden="true"></canvas>
+        <canvas class="zd diyo" width="64" height="74" aria-hidden="true"></canvas>
+      </div>
+    </section>
+
     <!-- 1 · blessing -->
     <section class="scene" id="s1" aria-label="Blessing of Lord Ganesha">
       <div class="gbox" id="gbox"></div>
@@ -1156,7 +1182,7 @@
     </section>
 
     <canvas id="ink" aria-hidden="true"></canvas>
-    <div id="hud" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i></div>
+    <div id="hud" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
     <div id="tap"><button class="prev" type="button" aria-label="Previous"></button><button class="next" type="button"
         aria-label="Next"></button></div>
     <div id="hint">Tap to continue</div>
@@ -1183,9 +1209,9 @@
       },
       mapUrl: "https://maps.app.goo.gl/vXqPxViDdYtSKS5e7"
     };
-    const DUR = { 1: 3000, 4: 3500 };
-    const ORDER = [0, 1, 4, 5];
-    const BAR = { 1: 0, 4: 1, 5: 2 };
+    const DUR = { 2: 3800, 1: 3000, 4: 3500 };
+    const ORDER = [0, 2, 1, 4, 5];
+    const BAR = { 2: 0, 1: 1, 4: 2, 5: 3 };
     const nextOf = i => ORDER[Math.min(ORDER.length - 1, ORDER.indexOf(i) + 1)];
     const prevOf = i => ORDER[Math.max(1, ORDER.indexOf(i) - 1)];   // story scene lengths (ms)
 
@@ -1225,7 +1251,7 @@
             p.createCanvas(W, H, p.WEBGL);
             brush.scaleBrushes(Math.max(1.4, W / 260));
             painter.ok = true;
-            p.background(C.ivory);
+            p.background(cur === 2 ? "#8E0E1A" : C.ivory);
             if (cur >= 0 && SCENE_PAINT[cur]) SCENE_PAINT[cur]();
           };
           p.draw = () => {
@@ -1299,9 +1325,13 @@
     }
     const SCENE_PAINT = {
       0: () => {
-        // Envelope scene uses CSS background, match frame bg to deep maroon
-        frame.style.background = "#1f0509";
+        // Envelope scene uses CSS sandalwood-ivory backdrop
+        frame.style.background = "#F4E4C8";
       },
+      2: () => paint("#8E0E1A", [
+        blob(0, 0, W * .5, "#5A0911", 120), blob(W, H, W * .55, "#5A0911", 120), blob(W * .5, H * .45, W * .45, "#C2202D", 70, .6),
+        ...toran(6), ...swag(-10, H - 18, W * .5, H - 30, -W * .05, Math.max(9, W * .026)), ...swag(W * .5, H - 30, W + 10, H - 18, -W * .05, Math.max(9, W * .026))
+      ]),
       1: () => paint(C.ivory, [
         blob(W * .5, H * .33, W * .42, "#F6B23A", 70, .55), blob(W * .5, H * .33, W * .26, "#F7C85A", 60, .4),
         ...toran(4),
@@ -1341,8 +1371,6 @@
       svg.appendChild(rs.line(w * .2, h * .325, w * .42, h * .325, { stroke: C.goldL, roughness: 1.2 }));
       svg.appendChild(rs.line(w * .58, h * .325, w * .8, h * .325, { stroke: C.goldL, roughness: 1.2 }));
       svg.appendChild(rs.circle(w * .5, h * .325, 12, { stroke: C.goldL, fill: C.goldL, fillStyle: "solid", roughness: 1 }));
-      const b = $("#btnArt"), [bw, bh] = sizeSvg(b), brs = rsvg(b);
-      b.appendChild(brs.rectangle(3, 3, bw - 6, bh - 6, { stroke: C.goldL, strokeWidth: 1.4, roughness: 1.4 }));
     }
     function drawCorners() {
       const svg = $("#cphoto svg.corners"); svg.innerHTML = "";
@@ -1586,6 +1614,13 @@
         const env = document.getElementById("envelope");
         if (env) env.classList.remove("opening");
       },
+      2() {
+        if (window.rough) {
+          drawCover();
+        } else {
+          const id = setInterval(() => { if (window.rough) { clearInterval(id); if (cur === 2) drawCover(); } }, 80);
+        }
+      },
       1() { later(() => animateGanesha($("#gbox")), 120); },
       4() {
         drawCorners();
@@ -1626,12 +1661,12 @@
       if (i === 5) bars.forEach(b => { b.style.transition = "none"; b.style.width = "100%"; });
     }
 
-    // Envelope open animation → then go to scene 1 (tap envelope or TAP TO OPEN)
+    // Envelope open animation → reveal Shubh Vivah card (scene 2)
     const envelope = document.getElementById("envelope");
     function openEnvelope() {
       if (envelope.classList.contains("opening")) return;
       envelope.classList.add("opening");
-      setTimeout(() => go(1), 950);
+      setTimeout(() => go(2), 950);
     }
     envelope.addEventListener("click", openEnvelope);
     const tapText = document.querySelector("#s0 .tap-text");
@@ -1642,10 +1677,10 @@
     tap.querySelector(".next").addEventListener("click", () => go(nextOf(cur)));
     tap.querySelector(".prev").addEventListener("click", () => go(prevOf(cur)));
     skip.addEventListener("click", () => go(5));
-    $("#replay").addEventListener("click", () => go(1));
+    $("#replay").addEventListener("click", () => go(2));
     document.addEventListener("keydown", e => {
       if (cur in DUR && e.key === "ArrowRight") go(nextOf(cur));
-      if (cur > 1 && e.key === "ArrowLeft") go(prevOf(cur));
+      if (cur !== 0 && cur !== 2 && e.key === "ArrowLeft") go(prevOf(cur));
     });
 
     /* ---------- live countdown ---------- */
