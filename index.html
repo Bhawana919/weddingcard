@@ -163,67 +163,138 @@
       pointer-events: none
     }
 
-    /* cover */
+    /* cover — envelope */
     #s0 {
-      color: #F7E7C4
+      background: radial-gradient(ellipse at 50% 60%, #1a4a4a 0%, #0d2f30 50%, #061a1b 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      overflow: hidden
     }
 
-    #s0 .mantra {
-      top: 15.5%;
-      font-size: 15px;
-      color: var(--gold-l);
-      letter-spacing: .05em
+    #s0 .sparkles { position:absolute; inset:0; pointer-events:none; z-index:0 }
+    #s0 .sparkles i {
+      position:absolute; width:3px; height:3px; border-radius:50%;
+      background:#ffe9a0; opacity:0;
+      animation: sparkle 4s ease-in-out infinite
+    }
+    @keyframes sparkle { 0%,100%{opacity:0;transform:scale(.5)} 50%{opacity:.85;transform:scale(1.2)} }
+
+    #s0 .env-heading {
+      font-family:"Cormorant Garamond",serif; font-weight:600;
+      font-size:13px; letter-spacing:.28em; text-transform:uppercase;
+      color:#d4b96a; margin-bottom:28px; z-index:2;
+      opacity:0; transform:translateY(12px);
+      transition: opacity .8s ease .3s, transform .8s ease .3s
+    }
+    #s0.on .env-heading { opacity:1; transform:none }
+
+    .envelope-wrap {
+      position:relative; width:72%; max-width:320px; aspect-ratio:1.55/1;
+      perspective:900px; z-index:2;
+      opacity:0; transform:scale(.92);
+      transition: opacity .7s ease .5s, transform .7s ease .5s
+    }
+    #s0.on .envelope-wrap { opacity:1; transform:scale(1) }
+
+    .envelope {
+      position:relative; width:100%; height:100%; cursor:pointer;
+      border-radius:6px; overflow:visible
     }
 
-    #s0 .shubha {
-      top: 20.5%;
-      font-size: clamp(40px, 12vw, 54px);
-      line-height: 1.15;
-      color: var(--gold-l);
-      text-shadow: 0 2px 0 rgba(60, 5, 10, .45)
+    .env-body {
+      position:absolute; inset:0; border-radius:6px;
+      background: linear-gradient(135deg, #a01830 0%, #8b1428 40%, #7a1024 100%);
+      box-shadow: 0 12px 40px rgba(0,0,0,.45), inset 0 0 0 1px rgba(212,185,106,.2);
+      overflow:hidden
+    }
+    /* diamond pattern on envelope */
+    .env-body::before {
+      content:""; position:absolute; inset:0;
+      background-image:
+        radial-gradient(circle, rgba(212,185,106,.22) 1.5px, transparent 1.5px),
+        radial-gradient(circle, rgba(212,185,106,.12) 1px, transparent 1px);
+      background-size: 28px 28px, 28px 28px;
+      background-position: 0 0, 14px 14px
+    }
+    /* gold border inside */
+    .env-body::after {
+      content:""; position:absolute; inset:6px; border-radius:4px;
+      border:1px solid rgba(212,185,106,.2); pointer-events:none
     }
 
-    #s0 .names {
-      top: 34.5%
+    /* fold lines */
+    .env-fold-bl, .env-fold-br { position:absolute; z-index:1 }
+    .env-fold-bl {
+      bottom:0; left:0; width:100%; height:100%;
+      background: linear-gradient(to top right, rgba(90,10,20,.35) 48.5%, transparent 50%);
+      pointer-events:none
+    }
+    .env-fold-br {
+      bottom:0; right:0; width:100%; height:100%;
+      background: linear-gradient(to top left, rgba(90,10,20,.35) 48.5%, transparent 50%);
+      pointer-events:none
     }
 
-    #s0 .names .script {
-      display: block;
-      font-size: clamp(50px, 15vw, 68px);
-      line-height: 1.05;
-      color: #FFF1D2;
-      text-shadow: 0 2px 6px rgba(50, 0, 5, .35)
+    /* top flap */
+    .env-flap {
+      position:absolute; top:0; left:0; width:100%; height:55%;
+      transform-origin: top center; z-index:3;
+      transition: transform .8s cubic-bezier(.4,.0,.2,1)
+    }
+    .env-flap-inner {
+      width:100%; height:100%;
+      background: linear-gradient(180deg, #8b1428 0%, #9a1830 100%);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      box-shadow: 0 4px 12px rgba(0,0,0,.25);
+      position:relative
+    }
+    .env-flap-inner::before {
+      content:""; position:absolute; inset:0;
+      background-image:
+        radial-gradient(circle, rgba(212,185,106,.18) 1.5px, transparent 1.5px),
+        radial-gradient(circle, rgba(212,185,106,.1) 1px, transparent 1px);
+      background-size: 28px 28px, 28px 28px;
+      background-position: 0 0, 14px 14px;
+      clip-path: polygon(0 0, 100% 0, 50% 100%)
     }
 
-    #s0 .names .amp {
-      display: block;
-      font-size: 20px;
-      letter-spacing: .3em;
-      color: var(--gold-l);
-      margin: 2px 0
+    .envelope.opening .env-flap {
+      transform: rotateX(180deg)
     }
 
-    #s0 .when {
-      top: 63%;
-      font-size: 19px;
-      font-weight: 600;
-      letter-spacing: .06em;
-      line-height: 1.45
+    /* wax seal */
+    .wax-seal {
+      position:absolute; left:50%; top:50%; z-index:4;
+      width:52px; height:52px;
+      transform:translate(-50%,-50%);
+      border-radius:50%;
+      background: radial-gradient(circle at 38% 35%, #f0d875, #c9a033 60%, #a07b20);
+      box-shadow: 0 3px 10px rgba(0,0,0,.35), inset 0 1px 2px rgba(255,240,180,.5);
+      display:flex; align-items:center; justify-content:center;
+      font-family:"Alex Brush",cursive; font-size:20px; color:#5a3a0a;
+      text-shadow: 0 1px 0 rgba(255,240,200,.4);
+      transition: transform .4s ease, opacity .4s ease
+    }
+    .envelope.opening .wax-seal {
+      transform: translate(-50%,-50%) scale(0); opacity:0
     }
 
-    #s0 .when .np {
-      font-size: 16px;
-      font-weight: 500;
-      color: var(--gold-l)
+    /* names on envelope */
+    .env-names {
+      position:absolute; bottom:14%; left:0; right:0; text-align:center;
+      font-family:"Alex Brush",cursive; font-size:clamp(22px, 6vw, 30px);
+      color:#d4b96a; z-index:2; pointer-events:none;
+      text-shadow: 0 1px 4px rgba(0,0,0,.3)
     }
 
-    #s0 .open {
-      top: 74.5%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 6px
+    #s0 .tap-text {
+      font-family:"Cormorant Garamond",serif; font-weight:600;
+      font-size:12px; letter-spacing:.3em; text-transform:uppercase;
+      color:rgba(212,185,106,.6); margin-top:28px; z-index:2;
+      opacity:0; transition: opacity .6s ease .9s
     }
+    #s0.on .tap-text { opacity:1 }
+    #s0 .tap-text { animation: tapPulse 2s ease-in-out infinite 1.5s }
+    @keyframes tapPulse { 0%,100%{opacity:.6} 50%{opacity:1} }
 
     .zd {
       display: block
@@ -857,20 +928,19 @@
 
     <!-- 0 · cover -->
     <section class="scene" id="s0" aria-label="Wedding invitation cover">
-      <svg class="rough" id="coverArt"></svg>
-      <div class="center mantra npd" data-in style="--d:.2s">॥ श्री गणेशाय नमः ॥</div>
-      <div class="center shubha npd" data-in style="--d:.45s">शुभ विवाह</div>
-      <div class="center names" data-in style="--d:.75s">
-        <span class="script">Aashish</span><span class="amp">&amp;</span><span class="script">Swostika</span>
+      <div class="sparkles" id="sparkles"></div>
+      <div class="env-heading">✦ A Special Invitation For You ✦</div>
+      <div class="envelope-wrap">
+        <div class="envelope" id="envelope">
+          <div class="env-body"></div>
+          <div class="env-fold-bl"></div>
+          <div class="env-fold-br"></div>
+          <div class="env-flap"><div class="env-flap-inner"></div></div>
+          <div class="wax-seal">A&S</div>
+          <div class="env-names">Aashish & Swostika</div>
+        </div>
       </div>
-      <div class="center when" data-in style="--d:1.05s">Saturday, 12 December 2026<br><span class="np">मंसिर २६ गते,
-          २०८३</span></div>
-      <div class="center open" data-in style="--d:1.3s">
-        <canvas class="zd diyo" width="64" height="74" aria-hidden="true"></canvas>
-        <button class="open-btn" id="openBtn" type="button"><span class="pulse"></span><svg class="rough"
-            id="btnArt"></svg>Open the invitation</button>
-        <canvas class="zd diyo" width="64" height="74" aria-hidden="true"></canvas>
-      </div>
+      <div class="tap-text">TAP TO OPEN</div>
     </section>
 
     <!-- 1 · blessing -->
@@ -1018,7 +1088,7 @@
             p.createCanvas(W, H, p.WEBGL);
             brush.scaleBrushes(Math.max(1.4, W / 260));
             painter.ok = true;
-            p.background(cur === 0 ? "#8E0E1A" : C.ivory);
+            p.background(C.ivory);
             if (cur >= 0 && SCENE_PAINT[cur]) SCENE_PAINT[cur]();
           };
           p.draw = () => {
@@ -1091,10 +1161,10 @@
       return pts;
     }
     const SCENE_PAINT = {
-      0: () => paint("#8E0E1A", [
-        blob(0, 0, W * .5, "#5A0911", 120), blob(W, H, W * .55, "#5A0911", 120), blob(W * .5, H * .45, W * .45, "#C2202D", 70, .6),
-        ...toran(6), ...swag(-10, H - 18, W * .5, H - 30, -W * .05, Math.max(9, W * .026)), ...swag(W * .5, H - 30, W + 10, H - 18, -W * .05, Math.max(9, W * .026))
-      ]),
+      0: () => {
+        // Envelope scene uses CSS background, just set frame bg to dark teal
+        frame.style.background = "#0d2f30";
+      },
       1: () => paint(C.ivory, [
         blob(W * .5, H * .33, W * .42, "#F6B23A", 70, .55), blob(W * .5, H * .33, W * .26, "#F7C85A", 60, .4),
         ...toran(4),
@@ -1350,12 +1420,21 @@
 
     const ENTER = {
       0() {
-        if (window.rough) {
-          drawCover();
-        } else {
-          // rough.js still loading — retry once it's available
-          const id = setInterval(() => { if (window.rough) { clearInterval(id); drawCover(); } }, 80);
+        // Generate sparkle particles
+        const box = document.getElementById("sparkles");
+        box.innerHTML = "";
+        for (let i = 0; i < 18; i++) {
+          const s = document.createElement("i");
+          s.style.left = (Math.random() * 100) + "%";
+          s.style.top = (Math.random() * 100) + "%";
+          s.style.animationDelay = (Math.random() * 4) + "s";
+          s.style.animationDuration = (3 + Math.random() * 3) + "s";
+          s.style.width = s.style.height = (2 + Math.random() * 2) + "px";
+          box.appendChild(s);
         }
+        // Reset envelope state
+        const env = document.getElementById("envelope");
+        if (env) env.classList.remove("opening");
       },
       1() { later(() => animateGanesha($("#gbox")), 120); },
       4() {
@@ -1397,7 +1476,13 @@
       if (i === 5) bars.forEach(b => { b.style.transition = "none"; b.style.width = "100%"; });
     }
 
-    $("#openBtn").addEventListener("click", () => go(1));
+    // Envelope open animation → then go to scene 1
+    const envelope = document.getElementById("envelope");
+    envelope.addEventListener("click", () => {
+      if (envelope.classList.contains("opening")) return;
+      envelope.classList.add("opening");
+      setTimeout(() => go(1), 1000);
+    });
     tap.querySelector(".next").addEventListener("click", () => go(nextOf(cur)));
     tap.querySelector(".prev").addEventListener("click", () => go(prevOf(cur)));
     skip.addEventListener("click", () => go(5));
